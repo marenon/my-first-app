@@ -1,4 +1,4 @@
-Import streamlit as st
+import streamlit as st
 
 # 1. إعدادات الصفحة والألوان (خلفية فاتحة وتصميم مريح)
 st.set_page_config(page_title="Engineering Titans", page_icon="🎀", layout="centered")
