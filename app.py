@@ -1,10 +1,57 @@
 import streamlit as st
 
-# 1. إعدادات الصفحة لتكون عريضة (Wide) لتغطية واجهة الحاسبة بالكامل
-st.set_page_config(page_title="Engineering Titans", page_icon="🧬", layout="wide")
+# 1. إعدادات الصفحة لتكون متناسقة وثابتة بدون نزول بالواجهة
+st.set_page_config(page_title="Engineering Titans", page_icon="🧬", layout="centered")
 
-# دالة التنسيق الـ CSS المحدثة لإجبار العنوان على النزول للمكان المطلوب بالسهم
-st.markdown("<style> html, body, [data-testid='stMarkdownContainer'], h1, h2, h3, p, button, label { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important; } .block-container { padding-top: 8rem !important; /* زيادة المسافة العلوية الافتراضية للموقع بالكامل */ padding-bottom: 1rem !important; padding-left: 0rem !important; padding-right: 0rem !important; max-width: 100% !important; } .stButton>button { background-color: #e75480; color: white; border-radius: 20px; padding: 12px 30px; font-size: 18px; border: none; width: 300px; font-weight: bold; display: block; margin: 0 auto !important; } .stButton>button:hover { background-color: #c93d6a; color: white; } h1 { color: #c93d6a; text-align: center; font-weight: 800; font-size: 46px !important; margin-top: 40px !important; /* دفع العنوان لأسفل إضافي */ margin-bottom: 30px !important; } [data-testid='stImage'] img { width: 100vw !important; max-width: 100vw !important; height: auto !important; object-fit: cover !important; display: block; margin: 0 !important; padding: 0 !important; } [data-testid='stImage'] { width: 100% !important; display: flex !important; justify-content: center !important; } .butterfly-quote { text-align: center; font-style: italic; color: #ffffff !important; background-color: #e75480; padding: 15px; border-radius: 15px; font-size: 18px; font-weight: 500; box-shadow: 0px 4px 10px rgba(0,0,0,0.05); max-width: 600px; margin: 0 auto; } .centered-content { max-width: 700px; margin: 0 auto; padding: 20px; } </style>", unsafe_allow_html=True)
+# دالة التنسيق الـ CSS المخصصة للخط والحجم والاتجاه والأزرار
+st.markdown("""
+    <style>
+    /* تطبيق خط Al Dhabi وحجم 60 لجهة اليسار للعنوان الرئيسي */
+    .custom-title {
+        font-family: 'Al Dhabi', 'Segoe UI', sans-serif !important;
+        font-size: 60px !important;
+        color: #c93d6a;
+        text-align: left !important;  /* جعل الكلام من جهة اليسار */
+        font-weight: bold;
+        margin-bottom: 5px !important;
+        padding-left: 10px;
+    }
+    
+    /* تغيير الخط لباقي عناصر الموقع ليكون احترافي ومودرن */
+    html, body, [data-testid="stMarkdownContainer"], h2, h3, p, button, label {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    }
+    
+    /* تنسيق الأزرار باللون الوردي وتوسيطها */
+    .stButton>button {
+        background-color: #e75480;
+        color: white;
+        border-radius: 20px;
+        padding: 10px 25px;
+        font-size: 18px;
+        border: none;
+        width: 100%;
+        font-weight: bold;
+    }
+    .stButton>button:hover {
+        background-color: #c93d6a;
+        color: white;
+    }
+    
+    /* تنسيق العبارة الاقتباسية في الواجهة الثانية */
+    .butterfly-quote {
+        text-align: center;
+        font-style: italic;
+        color: #ffffff !important;
+        background-color: #e75480;
+        padding: 15px;
+        border-radius: 15px;
+        font-size: 18px;
+        font-weight: 500;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.05);
+    }
+    </style>
+""", unsafe_allow_html=True)
 
 # إدارة الواجهات والتنقل باستخدام الـ Session State
 if 'page' not in st.session_state:
@@ -20,23 +67,22 @@ def prev_page():
 def reset_pages():
     st.session_state.page = 1
 
-# --- الواجهة الأولى (Page 1): العنوان نازل للمكان المطلوب والصورة ملء الشاشة ---
+# --- الواجهة الأولى (Page 1): خط Al Dhabi حجم 60، جهة اليسار، الصورة والزر في نفس الشاشة تماماً ---
 if st.session_state.page == 1:
-    # استخدام حاوية مخصصة بمسافة علوية محددة لضمان النزول
-    st.markdown("<div style='margin-top: 50px;'></div>", unsafe_allow_html=True)
-    st.title("Engineering Titans")
-    st.markdown("<br><br>", unsafe_allow_html=True)
     
-    # عرض الصورة لتأخذ كامل عرض واجهة الحاسبة
+    # عرض العنوان بالخط والحجم والاتجاه المطلوبين
+    st.markdown("<p class='custom-title'>Engineering Titans</p>", unsafe_allow_html=True)
+    
+    # عرض الصورة لتأخذ كامل عرض الحاوية الافتراضية المتناسقة مع الشاشة مباشرة
     st.image("main_logo.png.jpeg", use_container_width=True)
     
-    st.markdown("<br><br>", unsafe_allow_html=True)
-    st.button("Next", on_click=next_page)
+    st.write("")
+    if st.button("Next"):
+        next_page()
 
 # --- الواجهة الثانية (Page 2): معلومات المريض والشعار الرئيسي ---
 elif st.session_state.page == 2:
-    st.markdown("<div class='centered-content'>", unsafe_allow_html=True)
-    st.markdown("<h1 style='font-size: 28px;'>AI-Powered Mammogram Analysis for Early Breast Cancer Detection</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='font-size: 28px; color: #c93d6a; text-align: center;'>AI-Powered Mammogram Analysis for Early Breast Cancer Detection</h1>", unsafe_allow_html=True)
     st.write("---")
     
     st.image("https://i.imgur.com/vHqgZfN.jpeg", width=220)
@@ -53,15 +99,15 @@ elif st.session_state.page == 2:
     st.write("")
     col1, col2 = st.columns(2)
     with col1:
-        st.button("Back", on_click=prev_page)
+        if st.button("Back"):
+            prev_page()
     with col2:
-        st.button("Next", on_click=next_page)
-    st.markdown("</div>", unsafe_allow_html=True)
+        if st.button("Next"):
+            next_page()
 
 # --- الواجهة الثالثة (Page 3): رفع الملف الطبي ---
 elif st.session_state.page == 3:
-    st.markdown("<div class='centered-content'>", unsafe_allow_html=True)
-    st.title("UPLOAD DICOM")
+    st.markdown("<h1 style='color: #c93d6a; text-align: center;'>UPLOAD DICOM</h1>", unsafe_allow_html=True)
     st.write("---")
     
     uploaded_file = st.file_uploader("Select DICOM file to analyze ↑", type=["dcm", "png", "jpg", "jpeg"])
@@ -72,15 +118,15 @@ elif st.session_state.page == 3:
     st.write("")
     col1, col2 = st.columns(2)
     with col1:
-        st.button("Back", on_click=prev_page)
+        if st.button("Back"):
+            prev_page()
     with col2:
-        st.button("Next", on_click=next_page)
-    st.markdown("</div>", unsafe_allow_html=True)
+        if st.button("Next"):
+            next_page()
 
 # --- الواجهة الرابعة (Page 4): تصنيف الحالة ---
 elif st.session_state.page == 4:
-    st.markdown("<div class='centered-content'>", unsafe_allow_html=True)
-    st.title("Analysis Results - Classification")
+    st.markdown("<h1 style='color: #c93d6a; text-align: center;'>Analysis Results - Classification</h1>", unsafe_allow_html=True)
     st.write("---")
     
     st.markdown("<h3 style='text-align: left;'>Classification Results:</h3>", unsafe_allow_html=True)
@@ -97,15 +143,15 @@ elif st.session_state.page == 4:
     st.write("<br>", unsafe_allow_html=True)
     col1, col2 = st.columns(2)
     with col1:
-        st.button("Back", on_click=prev_page)
+        if st.button("Back"):
+            prev_page()
     with col2:
-        st.button("Next", on_click=next_page)
-    st.markdown("</div>", unsafe_allow_html=True)
+        if st.button("Next"):
+            next_page()
 
 # --- الواجهة الخامسة والأخيرة (Page 5): خطورة الحالة ---
 elif st.session_state.page == 5:
-    st.markdown("<div class='centered-content'>", unsafe_allow_html=True)
-    st.title("Analysis Results - Severity")
+    st.markdown("<h1 style='color: #c93d6a; text-align: center;'>Analysis Results - Severity</h1>", unsafe_allow_html=True)
     st.write("---")
     
     st.markdown("<h3 style='text-align: left;'>Severity Assessment:</h3>", unsafe_allow_html=True)
@@ -116,7 +162,8 @@ elif st.session_state.page == 5:
     st.write("---")
     col1, col2 = st.columns(2)
     with col1:
-        st.button("Back", on_click=prev_page)
+        if st.button("Back"):
+            prev_page()
     with col2:
-        st.button("Reset", on_click=reset_pages)
-    st.markdown("</div>", unsafe_allow_html=True)
+        if st.button("Reset"):
+            reset_pages()
