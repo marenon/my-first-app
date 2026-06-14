@@ -71,7 +71,12 @@ def reset_pages():
 
 # --- الواجهة الأولى (Page 1): الاسم والشعار الأساسي بالخط الجديد والفيونكة ---
 if st.session_state.page == 1:
-    st.markdown("<br><br><br>", unsafe_allow_html=True)
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    # استدعاء صورة الشريط الوردي والموجة التي رفعتموها
+    st.image("main_logo.png", width=450)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
     st.title("Engineering Titans 🎀")
     st.markdown("<br><br>", unsafe_allow_html=True)
     if st.button("Next"):
@@ -172,3 +177,4 @@ elif st.session_state.page == 5:
     with col2:
         if st.button("Reset"):
             reset_pages()
+            
